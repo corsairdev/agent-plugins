@@ -1,0 +1,17 @@
+{
+  "name": "corsair",
+  "version": "0.1.0",
+  "displayName": "Corsair",
+  "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
+  "author": {
+    "name": "Corsair",
+    "url": "https://corsair.dev"
+  },
+  "homepage": "https://corsair.dev",
+  "repository": "https://github.com/corsairdev/agent-plugins",
+  "license": "Apache-2.0",
+  "privacyPolicyUrl": "https://corsair.dev/privacy-policy",
+  "termsOfServiceUrl": "https://corsair.dev/terms-of-service",
+  "keywords": ["corsair", "integrations", "automation", "mcp"],
+  "mcpServers": "./mcp.json"
+}

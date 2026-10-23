@@ -1,0 +1,37 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Cross-file checks
+        run: node scripts/check.mjs
+
+      - name: Agent Plugins schemas
+        run: |
+          curl -fsSL https://agent-plugins.org/schemas/1.0.0/plugin.schema.json -o "$RUNNER_TEMP/plugin.schema.json"
+          curl -fsSL https://agent-plugins.org/schemas/1.0.0/mcp.schema.json -o "$RUNNER_TEMP/mcp.schema.json"
+          npx -y ajv-cli@5 validate --spec=draft2020 --strict=false -s "$RUNNER_TEMP/plugin.schema.json" -d "plugins/*/plugin.json"
+          npx -y ajv-cli@5 validate --spec=draft2020 --strict=false -s "$RUNNER_TEMP/mcp.schema.json" -d "plugins/*/mcp.json"
+
+      - name: Claude Code validator
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.309
+          claude plugin validate .
+          for plugin in plugins/*/; do
+            claude plugin validate "$plugin"
+            claude plugin validate --profile directory --strict "$plugin"
+          done

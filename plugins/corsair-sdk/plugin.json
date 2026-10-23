@@ -1,0 +1,33 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "corsair-sdk",
+  "version": "0.1.0",
+  "description": "Set up the Corsair SDK in a TypeScript app. Includes the Corsair docs MCP server.",
+  "author": {
+    "name": "Corsair",
+    "url": "https://corsair.dev"
+  },
+  "homepage": "https://docs.corsair.dev",
+  "repository": "https://github.com/corsairdev/agent-plugins",
+  "license": "Apache-2.0",
+  "keywords": ["corsair", "integrations", "oauth", "webhooks", "sdk"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Corsair SDK",
+        "shortDescription": "Set up the Corsair SDK in a TypeScript app",
+        "developerName": "Corsair",
+        "category": "Coding",
+        "websiteURL": "https://corsair.dev",
+        "privacyPolicyURL": "https://corsair.dev/privacy-policy",
+        "termsOfServiceURL": "https://corsair.dev/terms-of-service",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png",
+        "defaultPrompt": [
+          "Add Corsair to this app and connect GitHub.",
+          "Set up a Corsair webhook for new Linear issues."
+        ]
+      }
+    }
+  }
+}

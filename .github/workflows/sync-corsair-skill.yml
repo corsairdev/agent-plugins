@@ -1,0 +1,78 @@
+name: Sync corsair skill
+
+# Copies skills/corsair from corsairdev/corsair into plugins/corsair-sdk and opens a
+# PR when it changed. corsairdev/corsair is public, so reading it needs no token.
+# Opening the PR needs "Allow GitHub Actions to create and approve pull requests"
+# (Settings > Actions > General). A PR opened with GITHUB_TOKEN doesn't trigger
+# check.yml, so this job runs the cross-file checks itself before pushing.
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+  # corsairdev/corsair can send this on a push that touches skills/corsair, to
+  # sync at once instead of waiting for the schedule. See README.
+  repository_dispatch:
+    types: [corsair-skill-changed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-corsair-skill
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check out corsairdev/corsair (skills/corsair only)
+        uses: actions/checkout@v4
+        with:
+          repository: corsairdev/corsair
+          ref: main
+          path: .corsair
+          sparse-checkout: skills/corsair
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync
+        id: sync
+        run: |
+          node scripts/sync-corsair-skill.mjs \
+            --from .corsair/skills/corsair \
+            --commit "$(git -C .corsair rev-parse HEAD)"
+
+      - name: Cross-file checks
+        if: steps.sync.outputs.changed == 'true'
+        run: node scripts/check.mjs
+
+      - name: Open or update the sync PR
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.sync.outputs.version }}
+        run: |
+          short="$(git -C .corsair rev-parse --short HEAD)"
+          branch="sync/corsair-skill"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$branch"
+          git add plugins/corsair-sdk sync
+          git commit -m "chore(corsair-sdk): sync skill from corsairdev/corsair@${short}"
+          # An open sync PR that already carries this content needs no new commit.
+          if git fetch --quiet origin "$branch" 2>/dev/null && git diff --quiet FETCH_HEAD HEAD; then
+            echo "sync PR is already up to date"
+            exit 0
+          fi
+          git push --force origin "$branch"
+          if [ -z "$(gh pr list --head "$branch" --state open --json number --jq '.[].number')" ]; then
+            gh pr create --base main --head "$branch" \
+              --title "chore(corsair-sdk): sync skill from corsairdev/corsair" \
+              --body "Copies \`skills/corsair\` from corsairdev/corsair@${short} and bumps the corsair-sdk plugin to ${VERSION}. Edit the skill in corsairdev/corsair, not here."
+          fi

@@ -1,0 +1,32 @@
+{
+  "name": "corsair",
+  "interface": {
+    "displayName": "Corsair"
+  },
+  "plugins": [
+    {
+      "name": "corsair",
+      "source": {
+        "source": "local",
+        "path": "./plugins/corsair"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "corsair-sdk",
+      "source": {
+        "source": "local",
+        "path": "./plugins/corsair-sdk"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Coding"
+    }
+  ]
+}

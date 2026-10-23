@@ -1,0 +1,19 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "dev.corsair/mcp",
+  "title": "Corsair",
+  "description": "Use your connected apps from your agent: search synced data, act in apps and set up automations.",
+  "version": "0.1.0",
+  "websiteUrl": "https://corsair.dev",
+  "repository": {
+    "url": "https://github.com/corsairdev/agent-plugins",
+    "source": "github",
+    "subfolder": "plugins/corsair"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.corsair.cloud/mcp"
+    }
+  ]
+}

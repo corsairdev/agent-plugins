@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "corsair-docs": {
+      "type": "streamable-http",
+      "url": "https://docs.corsair.dev/mcp"
+    }
+  }
+}

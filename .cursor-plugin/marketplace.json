@@ -1,0 +1,25 @@
+{
+  "name": "corsair",
+  "owner": {
+    "name": "Corsair"
+  },
+  "metadata": {
+    "description": "Corsair's agent plugins: use your connected apps from your agent, or build with the Corsair SDK."
+  },
+  "plugins": [
+    {
+      "name": "corsair",
+      "source": "./plugins/corsair",
+      "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
+      "logo": "https://corsair.dev/corsair-logo.png",
+      "category": "productivity"
+    },
+    {
+      "name": "corsair-sdk",
+      "source": "./plugins/corsair-sdk",
+      "description": "Set up the Corsair SDK in a TypeScript app. Includes the Corsair docs MCP server.",
+      "logo": "https://corsair.dev/corsair-logo.png",
+      "category": "developer-tools"
+    }
+  ]
+}
