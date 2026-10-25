@@ -5,6 +5,7 @@
   "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
   "author": {
     "name": "Corsair",
+    "email": "primary@corsair.dev",
     "url": "https://corsair.dev"
   },
   "homepage": "https://corsair.dev",

@@ -27,6 +27,10 @@ npx skills add corsairdev/agent-plugins
 
 Cursor installs from the [Cursor Marketplace](https://cursor.com/marketplace) once the plugins are listed.
 
+## Support
+
+Email [primary@corsair.dev](mailto:primary@corsair.dev).
+
 ## Layout
 
 ```
