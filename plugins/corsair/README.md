@@ -14,11 +14,14 @@ The plugin adds the Corsair MCP server, `https://mcp.corsair.cloud/mcp`, and fou
 In Claude Code:
 
 ```
-/plugin install corsair --marketplace corsairdev/agent-plugins
+/plugin marketplace add corsairdev/agent-plugins
+/plugin install corsair@corsair
 ```
 
 Other clients: see the [repo README](../../README.md#install).
 
 The first time your client connects, it asks you to sign in to Corsair and approve the connection.
+
+Questions or problems: email [primary@corsair.dev](mailto:primary@corsair.dev).
 
 [Privacy policy](https://corsair.dev/privacy-policy) · [Terms](https://corsair.dev/terms-of-service)

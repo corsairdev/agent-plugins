@@ -1,7 +1,8 @@
 {
   "name": "corsair",
   "owner": {
-    "name": "Corsair"
+    "name": "Corsair",
+    "email": "primary@corsair.dev"
   },
   "metadata": {
     "description": "Corsair's agent plugins: use your connected apps from your agent, or build with the Corsair SDK."

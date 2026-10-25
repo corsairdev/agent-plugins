@@ -10,7 +10,8 @@ The plugin adds:
 In Claude Code:
 
 ```
-/plugin install corsair-sdk --marketplace corsairdev/agent-plugins
+/plugin marketplace add corsairdev/agent-plugins
+/plugin install corsair-sdk@corsair
 ```
 
 Other clients: see the [repo README](../../README.md#install).
@@ -20,5 +21,7 @@ The skill is maintained next to the SDK in [corsairdev/corsair](https://github.c
 To use your own connected apps from an agent rather than build with the SDK, install the `corsair` plugin instead.
 
 Docs: [docs.corsair.dev](https://docs.corsair.dev)
+
+Questions or problems: email [primary@corsair.dev](mailto:primary@corsair.dev).
 
 [Privacy policy](https://corsair.dev/privacy-policy) · [Terms](https://corsair.dev/terms-of-service)

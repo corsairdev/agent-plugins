@@ -5,6 +5,7 @@
   "description": "Set up the Corsair SDK in a TypeScript app. Includes the Corsair docs MCP server.",
   "author": {
     "name": "Corsair",
+    "email": "primary@corsair.dev",
     "url": "https://corsair.dev"
   },
   "homepage": "https://docs.corsair.dev",
