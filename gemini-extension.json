@@ -1,10 +1,10 @@
 {
   "name": "corsair",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
   "mcpServers": {
     "corsair": {
-      "httpUrl": "https://mcp.corsair.cloud/mcp",
+      "httpUrl": "https://mcp.corsair.dev/mcp",
       "oauth": {
         "enabled": true
       }

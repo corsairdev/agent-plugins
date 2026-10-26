@@ -3,7 +3,7 @@
   "mcpServers": {
     "corsair": {
       "type": "streamable-http",
-      "url": "https://mcp.corsair.cloud/mcp"
+      "url": "https://mcp.corsair.dev/mcp"
     }
   }
 }
