@@ -3,7 +3,7 @@
   "name": "dev.corsair/mcp",
   "title": "Corsair",
   "description": "Use your connected apps from your agent: search synced data, act in apps and set up automations.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "websiteUrl": "https://corsair.dev",
   "repository": {
     "url": "https://github.com/corsairdev/agent-plugins",
@@ -13,7 +13,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcp.corsair.cloud/mcp"
+      "url": "https://mcp.corsair.dev/mcp"
     }
   ]
 }

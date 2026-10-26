@@ -2,7 +2,7 @@
 
 Use the apps you've connected in [Corsair](https://corsair.dev) from your agent: read and act on them, search synced data, and set up automations that run on app events or a schedule.
 
-The plugin adds the Corsair MCP server, `https://mcp.corsair.cloud/mcp`, and four skills:
+The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and four skills:
 
 | Skill | Covers |
 | --- | --- |
