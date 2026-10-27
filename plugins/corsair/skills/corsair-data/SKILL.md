@@ -1,6 +1,6 @@
 ---
 name: corsair-data
-description: Use when answering a question from the user's connected apps through Corsair (find a message, summarize recent emails, check a calendar, look up an issue) or doing something in an app right now (send, create, update). Explains when to search synced data with search_data, read live with read_data, and make changes with run_script.
+description: Use when answering a question from the user's connected apps through Corsair (find a message, summarize recent emails, check a calendar, look up an issue) or doing something in an app right now (send, create, update). Explains when to search synced data with search_data and open results with fetch_record, read live with read_data, and make changes with run_script.
 ---
 
 # Read and act on connected apps
@@ -24,6 +24,14 @@ Matching is by keyword with stemming, not by meaning. So:
 - Put time limits in `after` and `before` as ISO timestamps, not in `query`. Work out the dates from today's date first.
 - Narrow with `plugins` (`["slack", "gmail"]`) and `entityTypes` (`["messages"]`, `["events"]`) when you know where the answer lives.
 - For a question with several parts, make one call per part.
+
+- For the newest items ("my latest emails"), set `sort: "recent"`. Every word of `query` must then appear, and `query` can be empty.
+
+Each result shows its app, date, title, the text that matched and an `id`. Often that's enough to answer. When it isn't, such as to read a whole email, document or meeting notes, open it with `fetch_record`:
+
+- Pass the `id` from `search_data`, or up to 20 of them in `ids` to read several in one call.
+- Long text comes in pages, and the reply says when there is more. Ask for the next one with `page`.
+- It reads Corsair's synced copy, not the app, so it answers fast. For the current state, use `read_data`.
 
 No match means nothing in the synced copy matched. It doesn't mean the thing doesn't exist. Try other keywords, then a live read with `read_data`.
 
