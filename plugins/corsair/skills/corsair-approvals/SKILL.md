@@ -16,9 +16,9 @@ Every action has a risk level: read, write, or destructive. The Corsair connecti
 
 You can't change the mode. Whoever manages the connection sets it in Corsair.
 
-No tool reports this connection's mode, so don't guess it. Work from what you can see: no `add_triggers` tool usually means the link is Read, no `add_integrations` tool means it can't add apps, and a "blocked by permission mode" error names the mode. Otherwise explain the four modes and say the link's settings in Corsair show which one applies.
+No tool reports this connection's mode, so don't guess it. Work from what you can see: no `update_routine` tool usually means the link is Read, no `get_connect_link` tool means it can't add apps, and a "blocked by permission mode" error names the mode. Otherwise explain the four modes and say the link's settings in Corsair show which one applies.
 
-Your client may also ask the user to confirm each `run_script` call, because the tool can make changes. `read_data` is marked read-only, so clients usually run it without asking. Those prompts come from the client, not from Corsair, and are separate from everything below.
+Your client may also ask the user to confirm each `run_script` and `update_routine` call, because those tools can make changes. `search`, `read_data` and `view_routines` are marked read-only, so clients usually run them without asking. Those prompts come from the client, not from Corsair, and are separate from everything below.
 
 ## What you'll see and what to do
 
@@ -40,6 +40,6 @@ This connection can't do that kind of action at all. Tell the user which action 
 **"... requires user approval before it can run"** with no link
 Corsair couldn't create an approval link. Tell the user what it said and stop.
 
-## Automations
+## Routines
 
-A run that `list_runs` shows as "needs approval before it can run" is held before any step runs, because the automation needs approval or one of its steps is destructive. Call `get_run` to see what it would do, and tell the user. It's approved or denied in Corsair, not from here. Don't run its steps yourself with `run_script`.
+A run that `view_routines` shows as "needs approval before it can run" (`awaiting_approval`) is held before any step runs, because the routine needs approval or one of its steps is destructive. Call `view_routines` with that run's id as `run` to see what it would do, and tell the user. It's approved or denied in Corsair, not from here. Don't run its steps yourself with `run_script`.
