@@ -1,6 +1,6 @@
 ---
 name: corsair-connect-apps
-description: Use when the user wants to use an app through Corsair that isn't connected yet, asks which apps are connected, or a Corsair call fails because an app isn't connected. Covers finding the app, handing the user the sign-in link from get_connect_link, and confirming the connection.
+description: Use when the user wants to use an app through Corsair that isn't connected yet, asks which apps are connected, or a Corsair call fails because an app isn't connected. Covers finding the app, handing over the sign-in link from get_connect_link or pointing to the Connect button on Corsair's card, and confirming the connection.
 ---
 
 # Connect an app through Corsair
@@ -10,25 +10,39 @@ Corsair can reach the user's apps (Gmail, Slack, GitHub, Linear and hundreds mor
 ## Steps
 
 1. **See what's connected.** Call `list_integrations` with no arguments. Each app is in one of four states, given in words and in the result's fields:
-   - "connected and ready to use" (`connected: true`): use it.
+   - "connected and ready to use" (`connected: true`): use it. `account` names who it's signed in as, when the app says.
    - "set up, but nobody has signed in yet" (`on_instance: true`, `connected: false`): go to step 3.
    - "can be connected from here" (`available_to_add: true`): go to step 3.
    - "needs setting up before it can be connected" (none of those): see "When there's no link" below.
 2. **Look up an app that isn't listed.** Call `list_integrations` with `filter` and `search`, for example `{"filter": "available", "search": "notion"}`. Use the `id` it returns in every later call. Don't guess ids: Google Calendar is `googlecalendar`.
 3. **Get the link.** Call `get_connect_link` with `{"integration": "<id>"}`. It adds the app first if it isn't here yet.
-4. **Hand over the link exactly as returned.** Give the user the `connect_url` (the result text repeats it), ask them to tell you when they've signed in, and stop.
+4. **Hand it over.** What you say depends on whether the chat shows Corsair's card:
+   - **The chat shows a Corsair card** with the app's name and a **Connect** button (claude.ai and other clients that show MCP Apps). Tell the user to press Connect on the card. Don't paste the link as well: two ways to sign in for one app reads as two steps.
+   - **No card** (most coding agents and terminals). Give the user the `connect_url` exactly as returned; the result text repeats it.
+
+   Then ask them to tell you when they've signed in, and stop.
 5. **Confirm.** When the user says they're done, call `list_integrations` again. The app should read "connected and ready to use" (`connected: true`). Then do what they first asked for.
+
+## The card
+
+The card keeps itself up to date, so you don't have to:
+
+- While the user signs in, it shows **Open again** in case they closed the sign-in tab.
+- When they finish, it shows **Connected** and a **Continue** button that messages you to carry on. Some chats put that message in the user's box for them to send.
+- If the link runs out first, it shows **Link expired** and a **New link** button that gets a fresh one. Don't call `get_connect_link` again for that.
+- An app Corsair provides directly shows **Ready**.
 
 ## Rules for the link
 
 - Copy it character for character. Don't shorten it, rebuild it, or put it behind another URL.
 - Never write a link yourself. If `get_connect_link` returned no link, there is no link.
-- Call `get_connect_link` once per app. Each call mints a new sign-in session, so calling it again only produces more links. Get a new one only if the user says the link failed or expired (`expires_at` in the result).
+- Call `get_connect_link` once per app. Each call mints a new sign-in session, so calling it again only produces more links.
+- A link works for about 10 minutes; the reply says how long ("works for 10 minutes"), and `expires_at` gives the time. Get a new one only if the user says it failed or ran out and there's no card to renew it.
 - Don't open the link or try to finish the sign-in yourself.
 
 ## When it comes back ready
 
-A few apps that Corsair provides directly come back with `connected: true` and no link. There is nothing to sign in to. Use the app right away.
+A few apps that Corsair provides directly come back with `connected: true` and no link. There is nothing to sign in to. Use the app right away. Corsair calls them with its own account and bills each call to the organization's Corsair credits; `list_integrations` gives the balance under `corsair` (`credits_left`, `spent_this_month`, `top_up_url`), and `list_operations` gives each action's price.
 
 ## When there's no link
 
@@ -46,5 +60,5 @@ User: "Post the standup notes to Slack."
 
 1. `list_integrations` says Slack can be connected from here.
 2. `get_connect_link {"integration": "slack"}` returns a link.
-3. Reply: "Slack isn't connected yet. Sign in here: <the link, exactly as returned>. Tell me when you're done and I'll post the notes."
-4. The user confirms. `list_integrations` now says Slack is connected and ready to use. Post the notes.
+3. Reply, in a chat that shows the card: "Slack isn't connected yet. Press Connect on the Corsair card above, and tell me when you're done." In one without: "Slack isn't connected yet. Sign in here: <the link, exactly as returned>. Tell me when you're done and I'll post the notes."
+4. The user confirms, or presses Continue on the card. `list_integrations` now says Slack is connected and ready to use. Post the notes.
