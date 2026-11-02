@@ -45,6 +45,7 @@ If two routines look alike, confirm which one with the user first.
 1. Ask the user to make the event happen, or tell them what to watch for. For a schedule, tell the user when the first run is due.
 2. Call `view_routines` with `routine` to see its recent runs. Each has an id and a status: succeeded (`successful`), failed (`error`), still running (`running`), or needs approval before it can run (`awaiting_approval`, see corsair-approvals).
 3. For a failed run, call `view_routines` with `run` to see its steps and the error. Describe the fix with `update_routine` (`routine` and `intent`), then check again.
+   - Some errors aren't the routine's fault: Corsair credits ran out, a spend limit was reached, an action "isn't offered on Corsair's own account", or a fault on Corsair's side. Rewriting the routine won't fix those, and Corsair doesn't try to. Tell the user what the error says instead.
 4. No run at all means the trigger didn't match. Ask the user what happened in the app and describe the event more precisely.
 5. If `view_routines` says nothing narrows a routine down, so it fires on every event of that kind, pass that warning on.
 

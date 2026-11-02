@@ -6,8 +6,8 @@ The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and four 
 
 | Skill | Covers |
 | --- | --- |
-| `corsair-connect-apps` | Finding an app, handing over its sign-in link, and confirming the connection |
-| `corsair-data` | When to search synced data, read an app live, or make a change |
+| `corsair-connect-apps` | Finding an app, handing over its sign-in link or pointing to the Connect button on Corsair's card, and confirming the connection |
+| `corsair-data` | When to search synced data, read an app live, make a change or wait on a long job; what apps on Corsair's account cost; when to send Corsair feedback |
 | `corsair-automations` | Building automations from plain English or exact steps, then checking their runs |
 | `corsair-approvals` | Permission modes, and what to do when an action needs approval |
 

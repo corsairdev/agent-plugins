@@ -18,7 +18,7 @@ You can't change the mode. Whoever manages the connection sets it in Corsair.
 
 No tool reports this connection's mode, so don't guess it. Work from what you can see: no `update_routine` tool usually means the link is Read, no `get_connect_link` tool means it can't add apps, and a "blocked by permission mode" error names the mode. Otherwise explain the four modes and say the link's settings in Corsair show which one applies.
 
-Your client may also ask the user to confirm each `run_script` and `update_routine` call, because those tools can make changes. `search`, `read_data` and `view_routines` are marked read-only, so clients usually run them without asking. Those prompts come from the client, not from Corsair, and are separate from everything below.
+Your client may also ask the user to confirm each `run_script` and `update_routine` call, because those tools can make changes. `search`, `read_data`, `get_job` and `view_routines` are marked read-only, so clients usually run them without asking. Those prompts come from the client, not from Corsair, and are separate from everything below.
 
 ## What you'll see and what to do
 
