@@ -83,7 +83,7 @@ Some apps run on Corsair's own account and bill each call to the organization's 
 
 - `list_operations` and `get_schema` give each action's price ("Price on Corsair's key: …"). An action tagged "not offered on Corsair's key" won't run there.
 - `list_integrations` gives the balance under `corsair`: `credits_left`, `spent_this_month`, when free credits come back, and `top_up_url`.
-- A call that fails at the app is refunded. Long jobs hold credits up front and settle when the job ends.
+- A call that fails at the app normally gets its credits back. The refund is best effort, so if the user says a failed call was still charged, offer to send `submit_feedback`, or point them to primary@corsair.dev. Long jobs hold credits up front and settle when the job ends.
 - When credits run out or a spend limit is reached, the call doesn't run and nothing is charged. Tell the user what the reply says, including the top-up link if it gives one. Don't retry.
 
 ## Replies that need the user
