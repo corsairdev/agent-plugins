@@ -69,11 +69,11 @@ return await corsair.slack.api.messages.post({ channel: ships.id, text: 'Deploy 
 Some actions start work that outlasts one call: a site crawl, an async document parse, an agent run, an image or video prediction. Corsair notices the start, waits a few seconds, and returns the job:
 
 - If it finished in that time, its result is in the reply, under `jobs` in the structured result.
-- If not, the reply says it "is still running" and gives a `job` handle such as `firecrawl:crawl.get:<id>`. Call `get_job` with that `job`. It waits up to 20 seconds (`wait`, 0 to only check) and returns `status`: `completed` with the `result`, `failed`, or still `running`. Still running means call `get_job` again later; don't loop on it in one turn for minutes.
+- If not, the reply says it "is still running" and gives a `job` handle such as `firecrawl:crawl.get:<id>`. Call `get_job` with that `job`. It waits 5 seconds by default (`wait`, up to 20; 0 only checks) and returns `status`: `completed` with the `result`, `failed`, or still `running`. Still running means call `get_job` again later; don't loop on it in one turn for minutes.
 - Pass the handle exactly as given. Don't build one yourself: `get_job` only takes handles from Corsair replies.
 - The reply also gives `read`, a `read_data` snippet that reads the job directly, and `cancel` where the app can stop it, a `run_script` snippet. Stop a job only when the user asks.
 - A result too large for `get_job` says so; read it in parts with the `read` snippet.
-- In a chat that shows Corsair's cards, `get_job` shows a job card that keeps checking until the job ends and offers **Continue**. Tell the user they can watch it there.
+- In a chat that shows Corsair's cards, `get_job` shows a job card that keeps checking until the job ends and offers **Continue**. Tell the user they can watch it there, and stop: another `get_job` only adds a second card.
 
 This works whether the app uses the user's own account or Corsair's.
 
@@ -82,9 +82,9 @@ This works whether the app uses the user's own account or Corsair's.
 Some apps run on Corsair's own account and bill each call to the organization's Corsair credits; nothing to sign in to. For these:
 
 - `list_operations` and `get_schema` give each action's price ("Price on Corsair's key: …"). An action tagged "not offered on Corsair's key" won't run there.
-- `list_integrations` gives the balance under `corsair`: `credits_left`, `spent_this_month`, when free credits come back, and `top_up_url`.
+- `list_integrations` gives the balance under `corsair`: `credits_left`, `free_credits`, when free credits come back (`free_credits_reset_on`) and `spent_this_month`.
 - A call that fails at the app is refunded. Long jobs hold credits up front and settle when the job ends.
-- When credits run out or a spend limit is reached, the call doesn't run and nothing is charged. Tell the user what the reply says, including the top-up link if it gives one. Don't retry.
+- When credits run out or a spend limit is reached, the call doesn't run and nothing is charged. Tell the user what the reply says. It links to how credits work; don't send the user a link to buy credits yourself. Don't retry.
 
 ## Replies that need the user
 
