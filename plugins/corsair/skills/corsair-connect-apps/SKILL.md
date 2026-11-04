@@ -42,7 +42,7 @@ The card keeps itself up to date, so you don't have to:
 
 ## When it comes back ready
 
-A few apps that Corsair provides directly come back with `connected: true` and no link. There is nothing to sign in to. Use the app right away. Corsair calls them with its own account and bills each call to the organization's Corsair credits; `list_integrations` gives the balance under `corsair` (`credits_left`, `spent_this_month`, `top_up_url`), and `list_operations` gives each action's price.
+A few apps that Corsair provides directly come back with `connected: true` and no link. There is nothing to sign in to. Use the app right away. Corsair calls them with its own account and bills each call to the organization's Corsair credits; `list_integrations` gives the balance under `corsair` (`credits_left`, `spent_this_month`), and `list_operations` gives each action's price.
 
 ## When there's no link
 
