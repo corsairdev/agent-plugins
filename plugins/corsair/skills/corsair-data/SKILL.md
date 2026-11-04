@@ -94,10 +94,12 @@ A reply can end with `Needs you:` and a list: an app whose sign-in expired, Cors
 
 `submit_feedback` sends the Corsair team a short note about Corsair itself: a tool that failed (`category: "failed"`), answered wrongly (`wrong_result`), an app or action Corsair lacks (`missing`), or something confusing (`confusing`).
 
-- Send one only when the user asks, or says yes after you offer because something went wrong.
-- Write `note` in your own words: what you tried, which tool, what happened. Never include anything read from the user's apps (message or file contents, names, email addresses, phone numbers) or any key.
+- Send one on your own, once per issue, when the user asked for something Corsair can't do (an app or action it lacks) or a reply said the fault is on Corsair's side. Then tell the user in one line that you sent it.
+- For a wrong or confusing answer, offer first and send only if the user agrees.
+- Don't send one for the user's own mistake, an app's own refusal, or a limit working as intended (credits, approvals).
+- Write `note` in your own words: what the user wanted, which tool, what happened. Never include anything read from the user's apps (message or file contents, names, email addresses, phone numbers) or any key.
 - When the failed reply ended with `Ref: <code>`, pass that code as `ref`. Add `tool` and `integration` when you know them.
-- People at Corsair read these, but nobody replies in the chat. Tell the user it was sent.
+- People at Corsair read these, but nobody replies in the chat. If the call fails, don't retry it.
 
 ## Doing it later instead of now
 
