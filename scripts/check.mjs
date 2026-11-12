@@ -70,7 +70,20 @@ for (const { name } of entries.claude) {
       fail(`${market} marketplace: ${name} description differs from ${dir}/plugin.json`);
     }
   }
-  if (claude.mcpServers !== "./mcp.json") fail(`${dir}/.claude-plugin/plugin.json: mcpServers should be "./mcp.json"`);
+  // Claude's directory refuses the Agent Plugins MCP file ($schema, type
+  // streamable-http), so the Claude manifest declares its servers inline with
+  // type http, one per server in mcp.json, at the same URL.
+  const portableServers = json(`${dir}/mcp.json`)?.mcpServers ?? {};
+  const claudeServers = claude.mcpServers;
+  if (typeof claudeServers !== "object" || claudeServers === null) {
+    fail(`${dir}/.claude-plugin/plugin.json: mcpServers should be an inline object`);
+  } else {
+    for (const [name, server] of Object.entries(portableServers)) {
+      const c = claudeServers[name];
+      if (!c || c.type !== "http" || c.url !== server.url) fail(`${dir}/.claude-plugin/plugin.json: mcpServers.${name} should be {type: "http", url: "${server.url}"}`);
+    }
+    for (const name of Object.keys(claudeServers)) if (!portableServers[name]) fail(`${dir}/.claude-plugin/plugin.json: mcpServers.${name} is not in mcp.json`);
+  }
 
   const openai = portable.extensions?.["com.openai"] ?? {};
   for (const rel of [openai.onboardingSkill, openai.interface?.composerIcon, openai.interface?.logo]) {
@@ -99,6 +112,7 @@ for (const { name } of entries.claude) {
 const corsair = json("plugins/corsair/plugin.json");
 const urls = {
   "plugins/corsair/mcp.json": json("plugins/corsair/mcp.json")?.mcpServers?.corsair?.url,
+  "plugins/corsair/.claude-plugin/plugin.json": json("plugins/corsair/.claude-plugin/plugin.json")?.mcpServers?.corsair?.url,
   "gemini-extension.json": json("gemini-extension.json")?.mcpServers?.corsair?.httpUrl,
   "plugins/corsair/server.json": json("plugins/corsair/server.json")?.remotes?.[0]?.url,
 };

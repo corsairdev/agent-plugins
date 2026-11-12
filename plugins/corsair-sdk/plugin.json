@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "corsair-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Set up the Corsair SDK in a TypeScript app. Includes the Corsair docs MCP server.",
   "author": {
     "name": "Corsair",
@@ -11,7 +11,13 @@
   "homepage": "https://docs.corsair.dev",
   "repository": "https://github.com/corsairdev/agent-plugins",
   "license": "Apache-2.0",
-  "keywords": ["corsair", "integrations", "oauth", "webhooks", "sdk"],
+  "keywords": [
+    "corsair",
+    "integrations",
+    "oauth",
+    "webhooks",
+    "sdk"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {

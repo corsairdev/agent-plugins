@@ -10,16 +10,25 @@
     {
       "name": "corsair",
       "source": "./plugins/corsair",
-      "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
+      "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, search across them and your connected apps, and set up routines.",
       "category": "productivity",
-      "tags": ["integrations", "automation", "mcp"]
+      "tags": [
+        "integrations",
+        "automation",
+        "mcp"
+      ]
     },
     {
       "name": "corsair-sdk",
       "source": "./plugins/corsair-sdk",
       "description": "Set up the Corsair SDK in a TypeScript app. Includes the Corsair docs MCP server.",
       "category": "development",
-      "tags": ["integrations", "oauth", "webhooks", "sdk"]
+      "tags": [
+        "integrations",
+        "oauth",
+        "webhooks",
+        "sdk"
+      ]
     }
   ]
 }

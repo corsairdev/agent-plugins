@@ -1,11 +1,12 @@
 # Corsair
 
-Use the apps you've connected in [Corsair](https://corsair.dev) from your agent: read and act on them, search synced data, and set up automations that run on app events or a schedule.
+Work in [Corsair](https://corsair.dev) from your agent: track issues in Corsair's PM, keep people, companies and deals in its CRM, use the other apps you've connected, search across all of them, and set up automations that run on app events or a schedule.
 
-The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and five skills:
+The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and six skills:
 
 | Skill | Covers |
 | --- | --- |
+| `corsair-workspace` | Corsair's own PM and CRM: filing and updating issues, and keeping people, companies, deals, notes and tasks |
 | `corsair-connect-apps` | Finding an app, handing over its sign-in link or pointing to the Connect button on Corsair's card, and confirming the connection |
 | `corsair-data` | When to search synced data, read an app live, make a change or wait on a long job; what apps on Corsair's account cost; when to send Corsair feedback |
 | `corsair-automations` | Building automations from plain English or exact steps, then checking their runs |

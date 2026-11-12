@@ -1,9 +1,9 @@
 {
   "name": "corsair",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "displayName": "Corsair",
   "icon": "./assets/icon.png",
-  "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
+  "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, search across them and your connected apps, and set up routines.",
   "author": {
     "name": "Corsair",
     "email": "primary@corsair.dev",
@@ -16,6 +16,16 @@
   "license": "Apache-2.0",
   "privacyPolicyUrl": "https://corsair.dev/privacy-policy",
   "termsOfServiceUrl": "https://corsair.dev/terms-of-service",
-  "keywords": ["corsair", "integrations", "automation", "mcp"],
-  "mcpServers": "./mcp.json"
+  "keywords": [
+    "corsair",
+    "integrations",
+    "automation",
+    "mcp"
+  ],
+  "mcpServers": {
+    "corsair": {
+      "type": "http",
+      "url": "https://mcp.corsair.dev/mcp"
+    }
+  }
 }

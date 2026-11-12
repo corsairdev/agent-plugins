@@ -11,7 +11,7 @@
     {
       "name": "corsair",
       "source": "./plugins/corsair",
-      "description": "Use your connected apps from your agent: read and act on them, search synced data and set up automations.",
+      "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, search across them and your connected apps, and set up routines.",
       "logo": "https://corsair.dev/corsair-logo.png",
       "category": "productivity"
     },

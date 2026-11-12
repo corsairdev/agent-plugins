@@ -1,6 +1,6 @@
 ---
 name: corsair-data
-description: Use when answering a question from the user's connected apps through Corsair (find a message, summarize recent emails, check a calendar, look up an issue) or doing something in an app right now (send, create, update). Explains when to search synced data with search, read live with read_data, make changes with run_script, wait on long jobs with get_job, what apps on Corsair's account cost, and when to send submit_feedback.
+description: Use when answering a question from the user's Corsair workspace or connected apps (find a message, summarize recent emails, check a calendar, look up an issue, a deal or a note in Corsair's PM or CRM) or doing something in an app right now (send, create, update). Explains when to search synced data with search, read live with read_data, make changes with run_script, wait on long jobs with get_job, what apps on Corsair's account cost, and when to send submit_feedback.
 ---
 
 # Read and act on connected apps
@@ -9,7 +9,7 @@ Three Corsair tools reach the user's data:
 
 | | `search` | `read_data` | `run_script` |
 | --- | --- | --- | --- |
-| Reads | Data Corsair has already synced (Slack messages, Gmail, Calendar and so on) | The app's live API | The app's live API |
+| Reads | Corsair's own PM and CRM, and data Corsair has already synced from connected apps (Slack messages, Gmail, Calendar and so on) | The app's live API | The app's live API |
 | Writes | No | No: the script stops at the first write, before that write runs | Yes: send, create, update, delete |
 | Best for | Finding things ("what did Sarah say about the refund?") | Current state and exact lists | Any change |
 
