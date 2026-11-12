@@ -4,7 +4,7 @@ Plugins that install [Corsair](https://corsair.dev) into AI clients. One tree se
 
 | Plugin | For | Contains |
 | --- | --- | --- |
-| [`corsair`](plugins/corsair) | People using their connected apps from an agent | The Corsair MCP server and five skills for using it |
+| [`corsair`](plugins/corsair) | People working in Corsair's PM and CRM, or their connected apps, from an agent | The Corsair MCP server and six skills for using it |
 | [`corsair-sdk`](plugins/corsair-sdk) | Developers adding the Corsair SDK to an app | The `corsair` setup skill and the Corsair docs MCP server |
 
 ## Install

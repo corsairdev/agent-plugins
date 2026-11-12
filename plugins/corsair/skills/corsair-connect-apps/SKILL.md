@@ -5,7 +5,7 @@ description: Use when the user wants to use an app through Corsair that isn't co
 
 # Connect an app through Corsair
 
-Corsair can reach the user's apps (Gmail, Slack, GitHub, Linear and hundreds more). Most need the user to sign in first. Your part is to find the app, get the sign-in link, hand it over, and confirm it worked. You never sign in on the user's behalf.
+Corsair's own PM and CRM are ready on every link and need no sign-in (see the corsair-workspace skill). Corsair can also reach the user's other apps (Gmail, Slack, GitHub, Linear and hundreds more); most of those need the user to sign in first. Your part is to find the app, get the sign-in link, hand it over, and confirm it worked. You never sign in on the user's behalf.
 
 ## Steps
 

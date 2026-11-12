@@ -1,6 +1,6 @@
 {
   "name": "corsair-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "displayName": "Corsair SDK",
   "description": "Set up the Corsair SDK in a TypeScript app. Includes the Corsair docs MCP server.",
   "author": {
@@ -13,6 +13,17 @@
   "license": "Apache-2.0",
   "privacyPolicyUrl": "https://corsair.dev/privacy-policy",
   "termsOfServiceUrl": "https://corsair.dev/terms-of-service",
-  "keywords": ["corsair", "integrations", "oauth", "webhooks", "sdk"],
-  "mcpServers": "./mcp.json"
+  "keywords": [
+    "corsair",
+    "integrations",
+    "oauth",
+    "webhooks",
+    "sdk"
+  ],
+  "mcpServers": {
+    "corsair-docs": {
+      "type": "http",
+      "url": "https://docs.corsair.dev/mcp"
+    }
+  }
 }
