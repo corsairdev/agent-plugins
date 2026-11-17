@@ -10,7 +10,7 @@
     {
       "name": "corsair",
       "source": "./plugins/corsair",
-      "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, search across them and your connected apps, and set up routines.",
+      "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, hand files to your apps, search across all of them, and set up routines.",
       "category": "productivity",
       "tags": [
         "integrations",

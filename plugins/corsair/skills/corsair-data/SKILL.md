@@ -9,7 +9,7 @@ Three Corsair tools reach the user's data:
 
 | | `search` | `read_data` | `run_script` |
 | --- | --- | --- | --- |
-| Reads | Corsair's own PM and CRM, and data Corsair has already synced from connected apps (Slack messages, Gmail, Calendar and so on) | The app's live API | The app's live API |
+| Reads | Corsair's own PM, CRM, routines and files, and data Corsair has synced from connected apps (Slack messages, Gmail, Calendar and so on). When an app's synced copy is behind, it reads that app live itself | The app's live API | The app's live API |
 | Writes | No | No: the script stops at the first write, before that write runs | Yes: send, create, update, delete |
 | Best for | Finding things ("what did Sarah say about the refund?") | Current state and exact lists | Any change |
 
@@ -17,26 +17,27 @@ Start with `search` when the user is looking for something. Use `read_data` when
 
 ## search
 
-Call it once with the whole question in `query`. Matching is by keyword with stemming, then ranked, not by meaning. So:
+Call it once with the whole question in `query`, in the user's words, and pass `timeZone` (the user's IANA zone, such as `Asia/Kolkata`) when you know it, so "today" and "this week" follow their calendar. Search works out who, what and when from the question itself ("what did pranay merge this week", "unread today", "what needs my reply", "issues assigned to me", "ENG-25"), so you don't set filters. A first name or handle finds that person in every app: "pranay" finds PranayHaldiya.
 
-- Put synonyms in `keywords`. For "refund requests": `keywords: ["refund", "chargeback", "money back"]`.
-- Put people, emails, channels, repos, projects and companies in `about`, not in `query`. `about: ["Sarah Chen"]` also matches messages she wrote.
-- Put time limits in `after` and `before` as ISO timestamps, not in `query`. Work out the dates from today's date first.
-- Narrow with `apps` (`["slack", "gmail"]`) and `kinds` (`["messages"]`) when you know where the answer lives.
-- For the newest items ("my latest emails"), set `sort: "recent"`.
+- Search matches words and can't negate them, so leave "not", "except", "without" and "excluding" out of `query`. For a "not X" question, use `sort: "recent"`, a larger `limit` such as 50 and `after` at the start of the day, then leave out X yourself.
+- `keywords` adds synonyms when the records may use another word. For "refund requests": `keywords: ["chargeback", "money back"]`.
+- For the newest items ("my latest emails"), set `sort: "recent"`. The default ranks by relevance.
 
-The reply has a sync line: which apps are synced and how recently.
+What the reply holds:
 
-- When it covers every app in the question, answer from the results.
-- When it doesn't, it names the live call to run for each app it misses. Run those together in one `read_data`.
+- Each hit shows its app, date, title, the text that matched and an id of the form `app:kind:id`, such as `github:issues:5125830691`. If you only see the structured result, build it from the hit's `pointer`: `plugin:entityType:entityId`.
+- When an app's synced copy was behind, search read that app live and put those rows among the hits. You don't need a separate live read for it.
+- `coverage` says how far back search looked in each app and what it couldn't cover, such as records without a date.
+- When no record answers the question, the reply says nothing matched (`answerable: false` in `coverage`) and lists a few `near_misses`. Don't present those as the answer: say nothing matched, and mention what came closest only as that.
+- An app Corsair can't search comes back named, with a `read_data` snippet that looks in it. Run those snippets together in one `read_data`.
 
-Each result shows its app, date, title, the text that matched and an id of the form `app:kind:id`, such as `github:issues:5125830691`. If you only see the structured result, build it from the hit's `pointer`: `plugin:entityType:entityId`. Often the results are enough to answer. When they aren't, such as to read a whole email, document or meeting notes, call `search` again with the ids:
+Often the hits are enough to answer. When they aren't, such as to read a whole email, document or meeting notes, call `search` again with the ids:
 
 - Pass up to 20 of them in `ids`.
 - Long text comes in pages, and the reply says when there is more. With one id, ask for the next one with `page`.
 - This reads Corsair's synced copy, not the app, so it answers fast. For the current state, use `read_data`.
 
-No match means nothing in the synced copy matched. It doesn't mean the thing doesn't exist. Try other keywords, then a live read with `read_data`.
+Nothing matched doesn't mean the thing doesn't exist. If `coverage` shows search didn't look back far enough, read the app with `read_data`.
 
 ## read_data and run_script
 
@@ -53,6 +54,7 @@ if (!ships) return 'No #ships channel';
 return await corsair.slack.api.messages.post({ channel: ships.id, text: 'Deploy finished' });
 ```
 
+- An app that takes a file gets a Files id (`fil_…`) where it takes a file URL, never the file's bytes or base64. See corsair-files to get the file in first.
 - Return only what answers the question. Map large responses down to the fields you need; very long results are cut short in the text you get back.
 - Change something only when the user asked for that change. If they didn't say exactly what gets sent or changed, or the change messages other people, deletes, or touches many records, say what you'll do and wait for a yes.
 - If `read_data` stops because the script reached a write, don't rerun it with `run_script` unless the user asked for that change.

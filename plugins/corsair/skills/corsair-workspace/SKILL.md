@@ -5,7 +5,7 @@ description: Use when the user wants to track work or customers in Corsair: file
 
 # Corsair's PM and CRM
 
-Every Corsair link comes with two apps of Corsair's own. Their data lives in Corsair, so they work without any other app connected.
+Every Corsair link comes with apps of Corsair's own. Their data lives in Corsair, so they work without any other app connected. This skill covers two of them; Files, where the user's files live, has its own skill, corsair-files.
 
 - **PM** (`pm`): teams, projects, issues with a status, priority, assignee, labels and a due date, plus comments.
 - **CRM** (`crm`): people, companies and deals. A deal has a stage (Lead, In Progress, Won, Lost), a value, an owner and linked people and company. Any record can have notes and tasks.
