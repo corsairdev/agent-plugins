@@ -3,7 +3,7 @@
   "version": "0.1.7",
   "displayName": "Corsair",
   "icon": "./assets/icon.png",
-  "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, hand files to your apps, search across all of them, and set up routines.",
+  "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, query your Postgres databases, hand files to your connected apps, search across all of it, and set up routines.",
   "author": {
     "name": "Corsair",
     "email": "primary@corsair.dev",
