@@ -1,13 +1,14 @@
 # Corsair
 
-Work in [Corsair](https://corsair.dev) from your agent: track issues in Corsair's PM, keep people, companies and deals in its CRM, use the other apps you've connected, search across all of them, and set up automations that run on app events or a schedule.
+Work in [Corsair](https://corsair.dev) from your agent: track issues in Corsair's PM, keep people, companies and deals in its CRM, query your Postgres databases, use the other apps you've connected, hand files to them, search across all of them, and set up automations that run on app events or a schedule.
 
-The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and six skills:
+The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and seven skills:
 
 | Skill | Covers |
 | --- | --- |
-| `corsair-workspace` | Corsair's own PM and CRM: filing and updating issues, and keeping people, companies, deals, notes and tasks |
+| `corsair-workspace` | Corsair's own apps: filing and updating issues in its PM, keeping people, companies, deals, notes and tasks in its CRM, querying the user's Postgres databases through pg, and reading Mate chats |
 | `corsair-connect-apps` | Finding an app, handing over its sign-in link or pointing to the Connect button on Corsair's card, and confirming the connection |
+| `corsair-files` | Getting a file into Corsair's Files from a chat, a URL or the user's machine, handing it to an app by its id, and reading, editing and saving files |
 | `corsair-data` | When to search synced data, read an app live, make a change or wait on a long job; what apps on Corsair's account cost; when to send Corsair feedback |
 | `corsair-automations` | Building automations from plain English or exact steps, then checking their runs |
 | `corsair-approvals` | Permission modes, and what to do when an action needs approval |
