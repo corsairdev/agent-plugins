@@ -21,7 +21,8 @@ Never paste a file's bytes or base64 into a script or a tool argument.
 | None of these | nothing | The reply gives an upload link that works for 10 minutes. Where the chat shows Corsair's card, the user picks the file there and presses Continue; tell them to use the card rather than repeating the link |
 
 - In claude.ai, a file the user attached sits in your code sandbox under `/mnt/user-data/uploads/`. Pass that path as `path` and run the command in the sandbox. Corsair keeps the file's own name. For other temporary copies (a hash for a name), pass `name` with the name the user's file had.
-- If the network refuses Corsair's address, don't retry and don't call `upload_file` again. The user picks the file from the card or link instead. Once the file is saved, the reply says which address to allow in the chat app's network settings so that next time the command works on its own; tell the user that once.
+- If the network refuses Corsair's address, don't retry and don't call `upload_file` again. The user picks the file from the card or link instead.
+- Once that file is saved, tell the user once how to skip the picker next time: in claude.ai, add `auth.corsair.dev` (the host in the upload link) under **Settings > Capabilities > Allowed websites**. After that, the command sends their attachments straight from the chat. If the reply names a different host, give that one.
 - `folder` puts the file in a folder, like `contracts/2026`.
 - `upload_file` only adds files. It never changes or replaces a file already in Files, and the same file sent twice stays one file with one id.
 
