@@ -14,6 +14,8 @@ The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and seven
 | `corsair-approvals` | Permission modes, and what to do when an action needs approval |
 | `corsair-skills` | Loading the user's saved skills, finding new ones on skills.sh, and saving or uploading skills so every agent on the link has them |
 
+## Install
+
 In Claude Code:
 
 ```
@@ -21,9 +23,46 @@ In Claude Code:
 /plugin install corsair@corsair
 ```
 
-Other clients: see the [repo README](../../README.md#install).
+Other clients: see the [repo README](https://github.com/corsairdev/agent-plugins#install).
 
 The first time your client connects, it asks you to sign in to Corsair and approve the connection.
+
+### Hermes Agent
+
+```bash
+hermes plugins install corsair
+hermes plugins enable corsair
+```
+
+Hermes installs plugins turned off; `enable` turns it on in the profile you chat from.
+
+Corsair signs you in with OAuth, and Hermes runs OAuth only for servers listed in your profile's `config.yaml`. Add this entry. It takes the place of the plugin's `corsair` server, so keep `trust: untrusted` in it:
+
+```yaml
+mcp_servers:
+  corsair:
+    url: https://mcp.corsair.dev/mcp
+    auth: oauth
+    trust: untrusted
+```
+
+Then sign in once from a terminal, in the same profile:
+
+```bash
+hermes mcp login corsair
+```
+
+Hermes stores and refreshes the sign-in. Cron jobs and the messaging gateway can't open a browser, so sign in before you use Corsair from them.
+
+The `corsair` server is marked `trust: untrusted`, so Hermes asks before each tool that changes something: `run_script` (sending, creating or updating in your apps), `update_routine`, `upload_file`, `save_skill`, `get_connect_link` and `submit_feedback`. Searching and reading run without asking. Hermes loads the skills as `corsair:<skill>`, for example `corsair:corsair-data`.
+
+## What the plugin does on your machine and the network
+
+- It connects to `https://mcp.corsair.dev/mcp` over HTTPS and sends Corsair the requests you make. Corsair reads and acts in the apps you've connected to your Corsair account, with the access you gave each app when you connected it.
+- Some apps run on Corsair's own account and bill each call to your Corsair credits. `list_operations` shows each action's price; when credits run out, the call doesn't run.
+- To upload a file from your machine, `upload_file` returns a `curl` command that sends that one file to your Corsair Files, and `save_skill` with a folder returns a command that uploads the skills in that folder. The skills tell the agent to run them only when you ask, and your client's own shell permissions still apply.
+- `use_skill` returns skills from your Corsair library: ones you saved, or imported from GitHub or skills.sh when you asked.
+- The plugin itself is a manifest, an MCP connection and Markdown skills. It runs no local code or background process, reads no credential files and sends no telemetry. Your client holds the sign-in token.
 
 Questions or problems: email [primary@corsair.dev](mailto:primary@corsair.dev).
 
