@@ -1,6 +1,6 @@
 # Corsair agent plugins
 
-Plugins that install [Corsair](https://corsair.dev) into AI clients. One tree serves Claude Code, Cursor, Codex, VS Code, GitHub Copilot, Grok Bot, Gemini CLI and `npx skills`.
+Plugins that install [Corsair](https://corsair.dev) into AI clients. One tree serves Claude Code, Cursor, Codex, VS Code, GitHub Copilot, Grok Bot, Hermes Agent, Gemini CLI and `npx skills`.
 
 | Plugin | For | Contains |
 | --- | --- | --- |
@@ -17,6 +17,10 @@ claude plugin install corsair@corsair      # or corsair-sdk@corsair
 # Codex
 codex plugin marketplace add corsairdev/agent-plugins
 codex plugin add corsair@corsair
+
+# Hermes Agent (then sign in: see plugins/corsair/README.md#hermes-agent)
+hermes plugins install corsair
+hermes plugins enable corsair
 
 # Gemini CLI (installs the Corsair MCP server)
 gemini extensions install https://github.com/corsairdev/agent-plugins
@@ -39,8 +43,9 @@ Email [primary@corsair.dev](mailto:primary@corsair.dev).
 .agents/plugins/marketplace.json    Codex marketplace
 gemini-extension.json               Gemini CLI, which installs only from a repo root
 plugins/<name>/
-  plugin.json                       Agent Plugins 1.0 manifest: Cursor, Codex and ChatGPT, VS Code, Copilot, Grok Bot
-                                    (extensions.com.openai holds the Codex and ChatGPT listing copy)
+  plugin.json                       Agent Plugins 1.0 manifest: Cursor, Codex and ChatGPT, VS Code, Copilot, Grok Bot, Hermes
+                                    (extensions.com.openai holds the Codex and ChatGPT listing copy;
+                                    extensions.com.nousresearch.hermes marks the corsair server trust: untrusted)
   .claude-plugin/plugin.json        Claude Code manifest, pointing mcpServers at ./mcp.json
   mcp.json                          the plugin's MCP server, read by every client above
   skills/<skill>/SKILL.md           Agent Skills, read by every client above

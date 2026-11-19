@@ -39,6 +39,13 @@
           "When a Linear issue is marked Done, post it in #ships on Slack."
         ]
       }
+    },
+    "com.nousresearch.hermes": {
+      "servers": {
+        "corsair": {
+          "trust": "untrusted"
+        }
+      }
     }
   }
 }
