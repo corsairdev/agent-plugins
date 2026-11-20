@@ -1,6 +1,6 @@
 # Corsair agent plugins
 
-Plugins that install [Corsair](https://corsair.dev) into AI clients. One tree serves Claude Code, Cursor, Codex, VS Code, GitHub Copilot, Grok Bot, Hermes Agent, Gemini CLI and `npx skills`.
+Plugins that install [Corsair](https://corsair.dev) into AI clients. One tree serves Claude Code, Cursor, Codex, VS Code, GitHub Copilot, Grok Bot, Hermes Agent, OpenClaw, Gemini CLI and `npx skills`.
 
 | Plugin | For | Contains |
 | --- | --- | --- |
@@ -21,6 +21,9 @@ codex plugin add corsair@corsair
 # Hermes Agent (then sign in: see plugins/corsair/README.md#hermes-agent)
 hermes plugins install corsair
 hermes plugins enable corsair
+
+# OpenClaw (then sign in from Settings > Plugins > corsair > Sign in)
+openclaw plugins install clawhub:@corsairdev/corsair
 
 # Gemini CLI (installs the Corsair MCP server)
 gemini extensions install https://github.com/corsairdev/agent-plugins
@@ -51,6 +54,8 @@ plugins/<name>/
   skills/<skill>/SKILL.md           Agent Skills, read by every client above
   assets/icon.png                   512×512 (the directory takes 512–2048 px)
 plugins/corsair/server.json         MCP Registry entry, dev.corsair/mcp
+clawhub/README.md                   README for the ClawHub (OpenClaw) bundle
+scripts/build-clawhub.mjs           builds that bundle into dist/clawhub/corsair from plugins/corsair
 sync/corsair-skill.json             which corsairdev/corsair commit the corsair skill came from
 ```
 
@@ -105,3 +110,14 @@ claude plugin validate plugins/corsair-sdk
 CI (`.github/workflows/check.yml`) runs these and validates every `plugin.json` and `mcp.json` against the Agent Plugins schemas.
 
 To release a change to a plugin, bump `version` in both of its manifests. For `corsair`, also bump it in `server.json` and `gemini-extension.json`. Clients decide whether to update by version.
+
+## Publishing to ClawHub (OpenClaw)
+
+OpenClaw reads a folder with `.claude-plugin/` as a Claude bundle, and only that format's `.mcp.json` can mark the server `"auth": "oauth"`, so ClawHub gets a built copy of `plugins/corsair` rather than the folder itself. Bump the plugin's version first: ClawHub refuses a version it already has.
+
+```bash
+node scripts/build-clawhub.mjs
+npx clawhub package publish dist/clawhub/corsair --family bundle-plugin --owner corsairdev \
+  --source-repo corsairdev/agent-plugins --source-commit "$(git rev-parse HEAD)" --source-path plugins/corsair --wait
+```
+
