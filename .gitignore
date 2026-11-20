@@ -2,3 +2,4 @@
 node_modules/
 # The sync workflow checks corsairdev/corsair out here.
 .corsair/
+dist/
