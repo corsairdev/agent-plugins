@@ -24,6 +24,7 @@ hermes plugins enable corsair
 
 # OpenClaw (then sign in from Settings > Plugins > corsair > Sign in)
 openclaw plugins install clawhub:@corsairdev/corsair
+openclaw plugins enable corsair
 
 # Gemini CLI (installs the Corsair MCP server)
 gemini extensions install https://github.com/corsairdev/agent-plugins

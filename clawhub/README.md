@@ -18,9 +18,10 @@ The plugin adds Corsair's hosted MCP server, `https://mcp.corsair.dev/mcp`, and 
 
 ```bash
 openclaw plugins install clawhub:@corsairdev/corsair
+openclaw plugins enable corsair
 ```
 
-Then sign in: in the Control UI, open **Settings > Plugins > corsair** and select **Sign in** next to the `corsair` account. A browser tab opens on Corsair; pick the link (the set of apps) to connect and approve. The page shows **Connected** when it's done. Start a new session so the tools load.
+OpenClaw installs it turned off; `enable` turns it on. Then sign in: in the Control UI, open **Settings > Plugins > corsair** and select **Sign in** next to the `corsair` account. A browser tab opens on Corsair; pick the link (the set of apps) to connect and approve. The page shows **Connected** when it's done. Start a new session so the tools load.
 
 The seven skills load right away. Corsair's tools reach the agent as `corsair` MCP tools once you've signed in.
 
