@@ -36,6 +36,14 @@ return await corsair.reducto.api.parse.parse({ input: 'fil_8Kq2xVn4' });
 
 `{ file_id: 'fil_…' }` in that place works too. When you need the link itself, for example to give the user a download link, `corsair.files.api.files.url({ file_id })` returns one that works for 15 minutes (`minutes`, up to 60).
 
+## Files an app returns
+
+When an action returns a file, such as a Drive download, an email attachment or an export, Corsair saves it to Files under `downloads/<app>` and puts its id (`fileId`) in the result. A file over 700 KB comes back as the id alone; a smaller one has its content beside the id.
+
+- As the call's second argument, `{ save: 'contracts' }` saves it to that folder instead, and `{ save: false }` skips saving.
+- A scan or photo saved without a folder is read only when you use it: `files.api.files.read_text`, or `files.api.files.reparse` to read it again. Saved to a folder, it's read when it arrives.
+- Hand the id to another app the same way as an uploaded file.
+
 ## Read, change and keep files
 
 | To | Action |
