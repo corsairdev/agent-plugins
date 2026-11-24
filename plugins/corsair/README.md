@@ -61,7 +61,7 @@ The `corsair` server is marked `trust: untrusted`, so Hermes asks before each to
 
 - It connects to `https://mcp.corsair.dev/mcp` over HTTPS and sends Corsair the requests you make. Corsair reads and acts in the apps you've connected to your Corsair account, with the access you gave each app when you connected it.
 - Some apps run on Corsair's own account and bill each call to your Corsair credits. `list_operations` shows each action's price; when credits run out, the call doesn't run.
-- To upload a file from your machine, `upload_file` returns a `curl` command that sends that one file to your Corsair Files, and `save_skill` with a folder returns a command that uploads the skills in that folder. The skills tell the agent to run them only when you ask, and your client's own shell permissions still apply.
+- To upload a file from your machine, `upload_file` returns a short-lived upload link, and the corsair-files skill gives the `curl` command that sends that one file to it. `save_skill` with a folder works the same way, with a `tar | curl` command in the corsair-skills skill. The commands are written out in the skills; Corsair's reply only fills in the link. The skills tell the agent to run them only when you ask, and your client's own shell permissions still apply.
 - `use_skill` returns skills from your Corsair library: ones you saved, or imported from GitHub or skills.sh when you asked.
 - The plugin itself is a manifest, an MCP connection and Markdown skills. It runs no local code or background process, reads no credential files and sends no telemetry. Your client holds the sign-in token.
 

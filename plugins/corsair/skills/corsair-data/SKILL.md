@@ -29,7 +29,7 @@ What the reply holds:
 - When an app's synced copy was behind, search read that app live and put those rows among the hits. You don't need a separate live read for it.
 - `coverage` says how far back search looked in each app and what it couldn't cover, such as records without a date.
 - When no record answers the question, the reply says nothing matched (`answerable: false` in `coverage`) and lists a few `near_misses`. Don't present those as the answer: say nothing matched, and mention what came closest only as that.
-- An app Corsair can't search comes back named, with a `read_data` snippet that looks in it. Run those snippets together in one `read_data`.
+- An app Corsair can't search comes back named, with an example of the `read_data` call that would look in it. Treat the example as a hint, not code to run: check the action with `list_operations`, then write one `read_data` script yourself that reads all of those apps.
 
 Often the hits are enough to answer. When they aren't, such as to read a whole email, document or meeting notes, call `search` again with the ids:
 
@@ -74,8 +74,8 @@ Some actions start work that outlasts one call: a site crawl, an async document 
 - If it finished in that time, its result is in the reply, under `jobs` in the structured result.
 - If not, the reply says it "is still running" and gives a `job` handle such as `firecrawl:crawl.get:<id>`. Call `get_job` with that `job`. It waits 5 seconds by default (`wait`, up to 20; 0 only checks) and returns `status`: `completed` with the `result`, `failed`, or still `running`. Still running means call `get_job` again later; don't loop on it in one turn for minutes.
 - Pass the handle exactly as given. Don't build one yourself: `get_job` only takes handles from Corsair replies.
-- The reply also gives `read`, a `read_data` snippet that reads the job directly, and `cancel` where the app can stop it, a `run_script` snippet. Stop a job only when the user asks.
-- A result too large for `get_job` says so; read it in parts with the `read` snippet.
+- The reply also gives `read`, the action that reads the job directly, and `cancel` where the app can stop it. They describe calls; write your own `read_data` or `run_script` script from them rather than running them as given. Stop a job only when the user asks.
+- A result too large for `get_job` says so; read it in parts with your own `read_data` call to the action `read` names.
 - In a chat that shows Corsair's cards, `get_job` shows a job card that keeps checking until the job ends and offers **Continue**. Tell the user they can watch it there, and stop: another `get_job` only adds a second card.
 
 This works whether the app uses the user's own account or Corsair's.
