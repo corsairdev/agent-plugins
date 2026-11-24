@@ -1,12 +1,13 @@
 # Corsair
 
-Work in [Corsair](https://corsair.dev) from your agent: track issues in Corsair's PM, keep people, companies and deals in its CRM, query your Postgres databases, use the other apps you've connected, hand files to them, search across all of them, and set up automations that run on app events or a schedule.
+Work in [Corsair](https://corsair.dev) from your agent: track issues in Corsair's PM, keep people, companies and deals in its CRM, query your Postgres databases, use the other apps you've connected, hand files to them, search across all of them, work through your list of what needs doing, and set up automations that run on app events or a schedule.
 
-The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and seven skills:
+The plugin adds the Corsair MCP server, `https://mcp.corsair.dev/mcp`, and eight skills:
 
 | Skill | Covers |
 | --- | --- |
-| `corsair-workspace` | Corsair's own apps: filing and updating issues in its PM, keeping people, companies, deals, notes and tasks in its CRM, querying the user's Postgres databases through pg, and reading Mate chats |
+| `corsair-workspace` | Corsair's own apps: filing and updating issues in its PM, keeping people, companies, deals, notes and tasks in its CRM, querying the user's Postgres databases through pg, and reading Agent chats |
+| `corsair-items` | The user's list of what needs doing: reading it, adding to it, and claiming an item, working it and reporting back with a pull request or a note |
 | `corsair-connect-apps` | Finding an app, handing over its sign-in link or pointing to the Connect button on Corsair's card, and confirming the connection |
 | `corsair-files` | Getting a file into Corsair's Files from a chat, a URL or the user's machine, handing it to an app by its id, and reading, editing and saving files |
 | `corsair-data` | When to search synced data, read an app live, make a change or wait on a long job; what apps on Corsair's account cost; when to send Corsair feedback |
@@ -54,7 +55,7 @@ hermes mcp login corsair
 
 Hermes stores and refreshes the sign-in. Cron jobs and the messaging gateway can't open a browser, so sign in before you use Corsair from them.
 
-The `corsair` server is marked `trust: untrusted`, so Hermes asks before each tool that changes something: `run_script` (sending, creating or updating in your apps), `update_routine`, `upload_file`, `save_skill`, `get_connect_link` and `submit_feedback`. Searching and reading run without asking. Hermes loads the skills as `corsair:<skill>`, for example `corsair:corsair-data`.
+The `corsair` server is marked `trust: untrusted`, so Hermes asks before each tool that changes something: `run_script` (sending, creating or updating in your apps), `update_routine`, `upload_file`, `save_skill`, `create_item`, `claim_item`, `report_result`, `get_connect_link` and `submit_feedback`. Searching and reading run without asking. Hermes loads the skills as `corsair:<skill>`, for example `corsair:corsair-data`.
 
 ## What the plugin does on your machine and the network
 

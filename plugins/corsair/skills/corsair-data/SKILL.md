@@ -54,6 +54,7 @@ if (!ships) return 'No #ships channel';
 return await corsair.slack.api.messages.post({ channel: ships.id, text: 'Deploy finished' });
 ```
 
+- An app can be signed in with more than one account; `list_integrations` names each. Pick one with `{ as: "<account>" }` as the call's second argument, such as `corsair.gmail.api.messages.list({}, { as: 'work@acme.com' })`. When the user hasn't said which account, ask.
 - An app that takes a file gets a Files id (`fil_…`) where it takes a file URL, never the file's bytes or base64. See corsair-files to get the file in first.
 - Return only what answers the question. Map large responses down to the fields you need; very long results are cut short in the text you get back.
 - Change something only when the user asked for that change. If they didn't say exactly what gets sent or changed, or the change messages other people, deletes, or touches many records, say what you'll do and wait for a yes.

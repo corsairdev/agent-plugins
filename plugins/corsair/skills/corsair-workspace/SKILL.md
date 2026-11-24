@@ -1,16 +1,16 @@
 ---
 name: corsair-workspace
-description: Use when the user wants to track work or customers in Corsair (file, update or list issues and projects in Corsair's PM; add and update people, companies, deals, notes and tasks in Corsair's CRM), query or change one of their Postgres databases through Corsair's pg, or find and read a Mate chat. Gives the action names and the usual lookups.
+description: Use when the user wants to track work or customers in Corsair (file, update or list issues and projects in Corsair's PM; add and update people, companies, deals, notes and tasks in Corsair's CRM), query or change one of their Postgres databases through Corsair's pg, or find and read a chat with Corsair's Agent. Gives the action names and the usual lookups.
 ---
 
 # Corsair's own apps
 
-Every Corsair link comes with apps of Corsair's own. Their data lives in Corsair, so they work without any other app connected. This skill covers PM, CRM, pg and Mate chats; Files, where the user's files live, has its own skill, corsair-files.
+Every Corsair link comes with apps of Corsair's own. Their data lives in Corsair, so they work without any other app connected. This skill covers PM, CRM, pg and Agent chats; Files, where the user's files live, has its own skill, corsair-files.
 
 - **PM** (`pm`): teams, projects, issues with a status, priority, assignee, labels and a due date, plus comments.
 - **CRM** (`crm`): people, companies and deals. A deal has a stage (Lead, In Progress, Won, Lost), a value, an owner and linked people and company. Any record can have notes and tasks.
 - **pg** (`pg`): the user's own Postgres databases, queried by name. The connection URL stays in Corsair; you never see it.
-- **Mate** (`assistant`): the chat assistant built into Corsair. You can find and read its chats.
+- **Agent** (`assistant`): the chat assistant built into Corsair. You can find and read its chats.
 
 Find what's there with `search` first ("what's open for the Kestrel pilot?" finds the deal, its notes and tasks, and the PM issues that name it). Use `read_data` for complete lists and `run_script` for changes, as the corsair-data skill explains.
 
@@ -72,6 +72,6 @@ Moving a deal to Won or Lost, or deleting anything, changes the user's records: 
 - Reads go in `read_data` and `query.exec` in `run_script`. `query.exec` changes the user's database, so run it only for a change they asked for. Before an UPDATE or DELETE without a narrow WHERE, a DROP or a migration, show the statement and wait for a yes.
 - Each member gets 10 queries per 10 seconds per database. Over a limit, the error says how many seconds to wait.
 
-## Mate chats
+## Agent chats
 
 `assistant.db.chats.search` finds chats (filter on `title`, `shared` or `updatedAt`), and `assistant.api.chats.get` with a chat's `id` returns its messages, oldest first. That includes chats in Shared, where each message also says who wrote it. `assistant.api.chats.rename`, `chats.move` and `chats.delete` change a chat; do that only when the user asks.
