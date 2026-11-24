@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "corsair",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Work in Corsair from your agent: track issues in its PM, keep contacts and deals in its CRM, query your Postgres databases, hand files to your connected apps, search across all of it, work through your list of what needs doing, and set up routines.",
   "author": {
     "name": "Corsair",
