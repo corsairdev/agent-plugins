@@ -63,7 +63,9 @@ The `corsair` server is marked `trust: untrusted`, so Hermes asks before each to
 - Some apps run on Corsair's own account and bill each call to your Corsair credits. `list_operations` shows each action's price; when credits run out, the call doesn't run.
 - To upload a file from your machine, `upload_file` returns a short-lived upload link, and the corsair-files skill gives the `curl` command that sends that one file to it. `save_skill` with a folder works the same way, with a `tar | curl` command in the corsair-skills skill. The commands are written out in the skills; Corsair's reply only fills in the link. The skills tell the agent to run them only when you ask, and your client's own shell permissions still apply.
 - `use_skill` returns skills from your Corsair library: ones you saved, or imported from GitHub or skills.sh when you asked.
-- The plugin itself is a manifest, an MCP connection and Markdown skills. It runs no local code or background process, reads no credential files and sends no telemetry. Your client holds the sign-in token.
+- When you ask for something Corsair can't do (an app or action it doesn't have), or a reply says a fault is on Corsair's side, the corsair-data skill has the agent send the Corsair team a short note with `submit_feedback` and then tell you it sent one. For a wrong or confusing answer, it asks you first. The note is in the agent's own words: what you wanted, which tool, what went wrong. It never includes anything read from your apps (message or file contents, names, email addresses, phone numbers) or any key. These notes go to Corsair, the same service the plugin connects to, and nowhere else.
+- `claim_item` and `report_result` record which agent is working an item and how it went, on your own list of items in your Corsair account.
+- The plugin itself is a manifest, an MCP connection and Markdown skills. It runs no local code or background process, reads no credential files, and sends no telemetry or usage data of its own. Your client holds the sign-in token.
 
 Questions or problems: email [primary@corsair.dev](mailto:primary@corsair.dev).
 
